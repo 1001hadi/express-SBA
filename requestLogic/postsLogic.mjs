@@ -39,7 +39,7 @@ const createPost = (req, res, next) => {
   }
 
   postsArr.push(newPost);
-  res.status(201).json(postsArr);
+  res.status(201).json(newPost);
 };
 
 // update post logic

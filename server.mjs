@@ -13,6 +13,9 @@ const __dirname = path.dirname(__filename);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// static folder setup
+app.use(express.static(path.join(__dirname, "public")));
+
 // routes
 app.use("/posts/", posts);
 
