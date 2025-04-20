@@ -9,6 +9,8 @@ import {
 
 const router = express.Router();
 
+
+
 // posts route
 router.get("/", getPosts);
 
