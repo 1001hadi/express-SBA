@@ -4,6 +4,9 @@ import posts from "./routes/posts.mjs";
 const app = express();
 let PORT = 3005;
 
+// middlewares
+app.use(express.json());
+
 // routes
 app.use("/posts/", posts);
 

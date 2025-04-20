@@ -4,8 +4,9 @@ import postsArr from "../data/data.mjs";
 const router = express.Router();
 
 // posts route
-router.get("/", (req, res, next) => {
-  const limit = parseInt(req.query.limit);
+router.get("/", (req, res) => {
+  // add the limit from query obj
+  const limit = Number(req.query.limit);
 
   if (!isNaN(limit) && limit > 0) {
     res.json(postsArr.slice(0, limit));
@@ -15,8 +16,9 @@ router.get("/", (req, res, next) => {
 });
 
 // specific post route
+// make sure handle error if id not matched
 router.get("/:id", (req, res, next) => {
-  const id = parseInt(req.params.id);
+  const id = Number(req.params.id);
   const post = postsArr.find((post) => post.id === id);
 
   if (!post) {
@@ -26,6 +28,23 @@ router.get("/:id", (req, res, next) => {
   }
 
   res.status(200).json(post);
+});
+
+// create new post
+router.post("/", (req, res, next) => {
+  const newPost = {
+    id: postsArr.length + 1,
+    title: req.body.title,
+  };
+
+  if (!newPost.title) {
+    const err = new Error(`Title must included!`);
+    err.status = 400;
+    return next(err);
+  }
+
+  postsArr.push(newPost);
+  res.status(201).json(postsArr);
 });
 
 export default router;
