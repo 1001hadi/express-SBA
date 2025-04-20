@@ -13,3 +13,19 @@ router.get("/", (req, res, next) => {
     res.json(postsArr);
   }
 });
+
+// specific post route
+router.get("/:id", (req, res, next) => {
+  const id = parseInt(req.params.id);
+  const post = postsArr.find((post) => post.id === id);
+
+  if (!post) {
+    const err = new Error(`Can't find the post with the id of ${id}`);
+    err.status = 404;
+    return next(err);
+  }
+
+  res.status(200).json(post);
+});
+
+export default router;

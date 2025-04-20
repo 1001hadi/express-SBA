@@ -5,8 +5,7 @@ const app = express();
 let PORT = 3005;
 
 // routes
-app.use("/api/posts/", posts);
-
+app.use("/posts/", posts);
 
 app.listen(PORT, () => {
   console.log(`The server is running on port: ${PORT}`);
