@@ -7,7 +7,6 @@ let PORT = 3005;
 
 // middlewares
 app.use(express.json());
-app.use(handleError);
 
 // routes
 app.use("/posts/", posts);
@@ -18,6 +17,9 @@ app.use((req, res, next) => {
   err.status = 404;
   next(err);
 });
+
+// error handling middleware
+app.use(handleError);
 
 app.listen(PORT, () => {
   console.log(`The server is running on port: ${PORT}`);
