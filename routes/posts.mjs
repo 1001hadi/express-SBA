@@ -47,4 +47,32 @@ router.post("/", (req, res, next) => {
   res.status(201).json(postsArr);
 });
 
+// Update single post
+router.put("/:id", (req, res, next) => {
+  const id = Number(req.params.id);
+  const post = postsArr.find((post) => post.id === id);
+
+  if (!post) {
+    const err = new Error(`Can't update the post with the id of ${id}`);
+    err.status = 404;
+    return next(err);
+  }
+  post.title = req.body.title;
+  res.status(200).json(postsArr);
+});
+
+// delete post
+router.delete("/:id", (req, res, next) => {
+  const id = parseInt(req.params.id);
+  const post = postsArr.find((post) => post.id === id);
+
+  if (!post) {
+    const err = new Error(`Can't delete the post with the id of ${id}`);
+    err.status = 404;
+    return next(err);
+  }
+  postsArr.splice(post, 1);
+  res.status(200).json(postsArr);
+});
+
 export default router;
