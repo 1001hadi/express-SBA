@@ -4,7 +4,7 @@ import postsArr from "../data/data.mjs";
 const router = express.Router();
 
 // posts route
-router.get("/", (req, res) => {
+router.get("/", (req, res, next) => {
   // add the limit from query obj
   const limit = Number(req.query.limit);
 
