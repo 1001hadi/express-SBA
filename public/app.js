@@ -51,8 +51,8 @@ document.addEventListener("DOMContentLoaded", () => {
         .catch((err) => {
           console.log(err);
         });
-    } catch (error) {
-      console.error("Error adding post:", error);
+    } catch (err) {
+      console.log("Error: can't adding new post:", err);
       outputDiv.textContent = "Failed to add post.";
     }
   }
