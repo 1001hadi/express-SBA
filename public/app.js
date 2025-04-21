@@ -13,15 +13,30 @@ document.addEventListener("DOMContentLoaded", () => {
         if (posts.length > 0) {
           let postsHTML = "<h2>All Posts</h2><ul>";
           posts.forEach((post) => {
-            postsHTML += `<li>Post Id:${post.id},  Title: ${post.title}</li>`;
+            postsHTML += `<li>Post Id: ${post.id}, Title: ${post.title} <button class="delete-btn" data-id="${post.id}">Delete</button> <button class="edit-btn" data-id="${post.id}">Edit</button></li>`;
           });
           postsHTML += "</ul>";
           outputDiv.innerHTML = postsHTML;
+
+          //  event listeners for created delete btn
+          const deleteBtn = document.querySelectorAll(".delete-btn");
+          deleteBtn.forEach((btn) => {
+            btn.addEventListener("click", async (e) => {
+              const postId = e.target.dataset.id;
+              // await handleDelete(postId);
+            });
+          });
+
+          //  event listeners for created edit btn
+        } else {
+          outputDiv.textContent = "No posts found.";
         }
+      } else {
+        outputDiv.textContent = `Error: Can't fetching posts: ${res.statusText}`;
       }
-    } catch (err) {
-      console.log("Error: can't fetch any posts:", err);
-      outputDiv.textContent = "Failed to fetch posts.";
+    } catch (error) {
+      console.error("Error display posts:", error);
+      outputDiv.textContent = "Can't fetch posts.";
     }
   }
 
