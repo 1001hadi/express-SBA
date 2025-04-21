@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
           deleteBtn.forEach((btn) => {
             btn.addEventListener("click", async (e) => {
               const postId = e.target.dataset.id;
-              // await handleDelete(postId);
+              await handleDelete(postId);
             });
           });
 
@@ -71,4 +71,28 @@ document.addEventListener("DOMContentLoaded", () => {
       outputDiv.textContent = "Failed to add post.";
     }
   }
+
+  // handle delete
+  // make sure to re-fetch the posts to update the displaying posts
+  async function handleDelete(postId) {
+    try {
+      const res = await fetch(`/posts/${postId}`, {
+        method: "DELETE",
+      });
+      if (res.ok) {
+        outputDiv.textContent = `Post with Id of ${postId} deleted successfully.`;
+
+        PostsBtn.click();
+      } else {
+        outputDiv.textContent = `Error deleting post ${postId}: ${res.statusText}`;
+      }
+    } catch (error) {
+      console.error(`Error deleting the post ${postId}:`, error);
+      outputDiv.textContent = `Failed to the delete post ${postId}.`;
+    }
+  }
+
+  // handle edit
+
+  // handle display editing form
 });
