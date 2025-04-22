@@ -90,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <form id="edit-form-${postId}">
               <label for="edit-title-${postId}">Edit Title:</label><br />
               <input type="text" id="edit-title-${postId}" name="title" value="${currentTitle}" /><br />
-              <button type="submit">Update Post</button>
+              <button type="submit" id="upload-btn">Update Post</button>
               <button type="button" class="cancel-edit-btn" data-id="${postId}">Cancel</button>
             </form>
           `;
